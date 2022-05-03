@@ -1,0 +1,11 @@
+{
+  "expo": {
+    "name": "interfocus-pokedex-private",
+    "slug": "interfocus-pokedex-private",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  },
+  "name": "interfocus-pokedex-private"
+}
