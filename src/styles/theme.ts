@@ -22,6 +22,8 @@ export default {
     LIGTH_GRAY: "#E0E0E0",
     WHITE: "#FFFFFF",
     BACKGROUND: "#F7F7F7",
+    PRIMARY: "#2D70B7",
+    SECONDARY: "#FFCB05",
     fonts: {
         REGULAR: "Poppins_400Regular",
         BOLD: "Poppins_700Bold"
