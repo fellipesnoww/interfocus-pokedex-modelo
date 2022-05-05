@@ -25,15 +25,15 @@ export const Container = styled.View<InputProps>`
   margin: 12px 0 16px 0;  
   border-radius: 8px;
   border-width: 2px;
-  border-color:  ${({ theme }) => theme.LIGTH_GRAY};
-  padding: 4px 0;
-  background-color: ${({ theme }) => theme.WHITE};  
-  width: 100%;
+  border-color:  ${({ theme }) => theme.ligth_gray};
+  padding: 4px 16px;
+  background-color: ${({ theme }) => theme.white};  
+  width: 100%;  
 `;
 
 export const InputText = styled.TextInput`
   flex: 1;
-  background-color: ${({ theme }) => theme.WHITE};
-  color: ${({ theme }) => theme.LIGTH_GRAY};      
+  background-color: ${({ theme }) => theme.white};
+  color: ${({ theme }) => theme.ligth_gray};      
   border-radius: 8px;
 `;

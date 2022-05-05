@@ -2,7 +2,7 @@ import styled from 'styled-components/native';
 
 export const Container = styled.View`
   flex: 1;
-  background-color: ${({theme}) => theme.BACKGROUND};
+  background-color: ${({theme}) => theme.background};
   padding: 0 16px;
 `;
 
@@ -23,6 +23,6 @@ export const ConteudoTitulo = styled.View`
 export const Titulo = styled.Text`
   font-size: 24px;
   font-family: ${({theme}) => theme.fonts.BOLD};
-  color: ${({theme}) => theme.DARK_GRAY};
+  color: ${({theme}) => theme.dark_gray};
   margin-left: 16px;
 `;
