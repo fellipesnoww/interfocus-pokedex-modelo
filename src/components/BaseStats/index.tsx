@@ -8,6 +8,15 @@ interface BaseStatsProps{
 }
 
 function BaseStats({stats, pokemonType}: BaseStatsProps){
+
+    function calculaValorStat(valorAtual: string){
+        const total = 252;        
+        const novoValorAtual = Number(valorAtual);
+        let valorAtualCemPc = novoValorAtual * 100;
+        let percentual = valorAtualCemPc/total;        
+        return percentual.toFixed(2);
+    }
+
     return (
         <Container>
             <Atributos>
@@ -29,37 +38,37 @@ function BaseStats({stats, pokemonType}: BaseStatsProps){
             <Medidores>
                 <MedidorBackground type={pokemonType}>
                     <MedidorValor 
-                        percentual={stats.hp}
+                        percentual={calculaValorStat(stats.hp)}
                         type={pokemonType}
                     />
                 </MedidorBackground>
                 <MedidorBackground type={pokemonType}>
                     <MedidorValor 
-                        percentual={stats.atk}
+                        percentual={calculaValorStat(stats.atk)}
                         type={pokemonType}
                     />
                 </MedidorBackground>
                 <MedidorBackground type={pokemonType}>
                     <MedidorValor 
-                        percentual={stats.def}
+                        percentual={calculaValorStat(stats.def)}
                         type={pokemonType}
                     />
                 </MedidorBackground>
                 <MedidorBackground type={pokemonType}>
                     <MedidorValor 
-                        percentual={stats.satk}
+                        percentual={calculaValorStat(stats.satk)}
                         type={pokemonType}
                     />
                 </MedidorBackground>
                 <MedidorBackground type={pokemonType}>
                     <MedidorValor 
-                        percentual={stats.sdef}
+                        percentual={calculaValorStat(stats.sdef)}
                         type={pokemonType}
                     />
                 </MedidorBackground>
                 <MedidorBackground type={pokemonType}>
                     <MedidorValor 
-                        percentual={stats.spd}
+                        percentual={calculaValorStat(stats.spd)}
                         type={pokemonType}
                     />
                 </MedidorBackground>
