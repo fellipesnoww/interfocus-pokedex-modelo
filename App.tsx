@@ -4,6 +4,7 @@ import AppLoading from 'expo-app-loading';
 import Home from './src/screens/Home';
 import { ThemeProvider } from 'styled-components';
 import theme from './src/styles/theme';
+import Detalhes from './src/screens/Detalhes';
 
 
 export default function App() {
@@ -17,7 +18,7 @@ export default function App() {
   }
   return (
     <ThemeProvider theme={theme}>
-      <Home />
+      <Detalhes />
     </ThemeProvider>
   );
 }

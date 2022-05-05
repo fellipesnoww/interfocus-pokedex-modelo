@@ -5,21 +5,21 @@ interface PokemonAbout {
 
 }
 
-interface PokemonMove{
+export interface PokemonMove{
     id: number;
     name: string;
 }
 
-interface PokemonStats {
+export interface PokemonStats {
     hp: string;
     atk: string;
     def: string;
-    sat: string;
-    sde: string;
+    satk: string;
+    sdef: string;
     spd: string;
 }
 
-interface PokemonType {
+export interface PokemonType {
     id: number;
     name: string;
 }
