@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { FlatList } from 'react-native';
+import { FlatList, Keyboard, TouchableWithoutFeedback } from 'react-native';
 
 import Pokebola from '../../assets/pokeball.svg';
 import Input from '../../components/Input';
@@ -15,59 +15,74 @@ import {
 } from './styles';
 
 function Home () {
+    const [nomeFiltro, setNomeFiltro] = useState('');
     const [pokemons, setPokemons] = useState<PokemonDTO[]>([]);
+    const [pokemonsFiltrados, setPokemonsFiltrados] = useState<PokemonDTO[]>([]);
+
+    const [loading, setLoading] = useState(true);
+
+    function alteraNomeFiltro(nome: string){
+        setNomeFiltro(nome);
+
+        const filtrados = pokemons.filter(p => p.name.toLowerCase().includes(nome.toLowerCase()));
+        setPokemonsFiltrados(filtrados);
+    }
 
     useEffect(() => {
         async function consultaPokemons() {
             try {
                 const resposta = await api.get<PokemonDTO[]>('/pokemons');
-
-                if(resposta.data.length > 0){
-                    console.log(resposta.data);
-                    setPokemons(resposta.data);
+                if(resposta.data.length > 0){                    
+                    setPokemons(resposta.data);   
+                    setPokemonsFiltrados(resposta.data)                 
                 }
             } catch (error) {
                 console.log('erro ao consultar pokemons')
-            }            
+            }
+            setLoading(false);            
         }
 
         consultaPokemons();
     },[]);
 
-    return(
-        <Container>
-            <Header>
-                <ConteudoTitulo>
-                    <Pokebola 
-                        width={24}
-                        height={24}
+    return(        
+        <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>            
+            <Container>                
+                    <Header>
+                        <ConteudoTitulo>
+                            <Pokebola 
+                                width={24}
+                                height={24}
+                            />
+                            <Titulo>Pokédex</Titulo>
+                        </ConteudoTitulo>
+                    </Header>
+                    <Input 
+                        placeholder='Procurar'
+                        value={nomeFiltro}
+                        onChangeText={alteraNomeFiltro}
                     />
-                    <Titulo>Pokédex</Titulo>
-                </ConteudoTitulo>
-            </Header>
-            <Input 
-                placeholder='Procurar'
-            />
 
-            <FlatList
-                data={pokemons}
-                keyExtractor={(item) => item.code}
-                numColumns={3}
-                renderItem={({item}) => (
-                    <SmallCard 
-                        pokemon={item}
-                    />
-                )}
-                contentContainerStyle={{
-                    alignItems: 'center',
-                    justifyContent: 'center'
-                }}
-                style={{
-                    width: '100%'                   
-                }}
-                
-            />
-        </Container>
+                    <FlatList
+                        data={pokemonsFiltrados}
+                        keyExtractor={(item) => item.code}
+                        numColumns={3}
+                        renderItem={({item}) => (
+                            <SmallCard 
+                                pokemon={item}
+                            />
+                        )}
+                        contentContainerStyle={{
+                            alignItems: 'center',
+                            justifyContent: 'center'
+                        }}
+                        style={{
+                            width: '100%'                   
+                        }}
+                        
+                    />                
+            </Container>
+        </TouchableWithoutFeedback>
     );
 }
 

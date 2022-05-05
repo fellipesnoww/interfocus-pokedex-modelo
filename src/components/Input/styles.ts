@@ -34,6 +34,6 @@ export const Container = styled.View<InputProps>`
 export const InputText = styled.TextInput`
   flex: 1;
   background-color: ${({ theme }) => theme.white};
-  color: ${({ theme }) => theme.ligth_gray};      
+  color: ${({ theme }) => theme.dark_gray};      
   border-radius: 8px;
 `;
