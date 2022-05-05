@@ -2,6 +2,7 @@ import React from "react";
 import { PokemonDTO } from "../../dtos/PokemonDTO";
 import { Codigo, Container, ConteudoCodigo, ConteudoNome, Nome } from "./styles";
 import retornaSvg from "../../utils/retornaSvg";
+import { useNavigation } from "@react-navigation/native";
 
 interface SmallCardProps{
     pokemon: PokemonDTO;
@@ -10,8 +11,14 @@ interface SmallCardProps{
 
 function SmallCard({pokemon, ...rest}:SmallCardProps){
     
+    const navigation = useNavigation();
+
+    function navegarParaDetalhes(pokemon: PokemonDTO){
+        navigation.navigate('Detalhes', {pokemon})
+    }
+
     return (
-        <Container {...rest} type={pokemon.types[0].name}>
+        <Container {...rest} type={pokemon.types[0].name} onPress={() => navegarParaDetalhes(pokemon)}>
             <ConteudoCodigo>
                 <Codigo type={pokemon.types[0].name}>{pokemon.code}</Codigo>
             </ConteudoCodigo>

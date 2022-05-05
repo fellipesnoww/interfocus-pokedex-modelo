@@ -1,68 +1,58 @@
-import React from "react";
+import { useRoute } from "@react-navigation/native";
+import React, { useEffect, useState } from "react";
+import { ActivityIndicator } from "react-native";
 import AboutData from "../../components/AboutData";
 import BaseStats from "../../components/BaseStats";
 import TypeCard from "../../components/TypeCard";
+import { PokemonDTO } from "../../dtos/PokemonDTO";
 import retornaSvg from "../../utils/retornaSvg";
 import { Codigo, Container, Conteudo, ConteudoSvg, ConteudoTitulo, Header, LabelDestaque, Nome, Sobre, Tipos } from "./styles";
 
+interface ParametrosTela{
+    pokemon: PokemonDTO;
+}
 
-function Detalhes(){
-    const tipos = [
-        {
-            id: 1,
-            name: "grass"
-        },
-        {
-            id: 2,
-            name: "poison"
-        }
-    ]
+function Detalhes(){   
+    const [pokemon, setPokemon] = useState<PokemonDTO>();
+
+    const route = useRoute();
+
+    useEffect(() => {
+        const parametros = route.params as ParametrosTela;        
+        setPokemon(parametros.pokemon);
+    },[]);
+
+    if(!pokemon) return <ActivityIndicator size="small" color="red" />
+
     return (
-        <Container>
+        <Container type={pokemon.types[0].name}>
             <Header>
                 <ConteudoTitulo>
                     <></>
-                    <Nome>Bulbasaur</Nome>
-                    <Codigo>#001</Codigo>
+                    <Nome>{pokemon.name}</Nome>
+                    <Codigo>{pokemon.code}</Codigo>
                 </ConteudoTitulo>
                 <></>
             </Header>
             <Conteudo>
                 <ConteudoSvg>
-                    {retornaSvg('Bulbasaur', 200, 200)}
+                    {retornaSvg(pokemon.name, 200, 200)}
                 </ConteudoSvg>
                 <Tipos>
-                    {tipos.map(t => (
+                    {pokemon?.types.map(t => (
                         <TypeCard tipoPokemon={t} key={t.id}/>
                     ))}
                 </Tipos>
-                <LabelDestaque type={tipos[0].name}>About</LabelDestaque>
+                <LabelDestaque type={pokemon.types[0].name}>About</LabelDestaque>
                 <AboutData 
-                    moves={[{
-                        "id": 1,
-                        "name": "Chlorophyll"
-                        },
-                        {
-                            "id": 2,
-                            "name": "Overgrow"
-                        }
-                    ]}
-                    weight="6,9 kg"
-                    height="0,7 m"
+                    moves={pokemon.moves}
+                    weight={pokemon.about.weight}
+                    height={pokemon.about.height}
                 />
-                <Sobre>There is a plant seed on its back right from the day this Pokémon is born. The seed slowly grows larger.</Sobre>
-                <LabelDestaque type={tipos[0].name}>Base Stats</LabelDestaque>
-                <BaseStats stats={
-                    {
-                        hp: "045",
-                        atk: "049",
-                        def: "049",
-                        satk: "065",
-                        sdef: "065",
-                        spd: "045"
-                    }
-                }
-                pokemonType={tipos[0].name}
+                <Sobre>{pokemon.about.description}.</Sobre>
+                <LabelDestaque type={pokemon.types[0].name}>Base Stats</LabelDestaque>
+                <BaseStats stats={pokemon.base_stats}
+                pokemonType={pokemon.types[0].name}
                 />
             </Conteudo>
         </Container>

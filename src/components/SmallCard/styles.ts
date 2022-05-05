@@ -4,7 +4,7 @@ interface Props {
     type: string;
 }
 
-export const Container = styled.View<Props>`
+export const Container = styled.TouchableOpacity<Props>`
   align-items: center;
   justify-content: center;
   border-radius: 8px;

@@ -4,10 +4,10 @@ interface Props {
     type: string;
 }
 
-export const Container = styled.View`
+export const Container = styled.View<Props>`
   flex: 1;
-  padding: 30px 4px 4px 4px;
-  background-color: ${({theme}) => theme.grass};
+  padding: 30px 4px 4px 4px;  
+  background-color: ${({theme, type}) => theme[type]};
 `;
 
 export const Header = styled.View`
@@ -17,6 +17,8 @@ export const Header = styled.View`
     align-items: center;
     justify-content: space-between;
     padding-bottom: 140px;
+     
+
 `;
 
 export const ConteudoTitulo = styled.View`
