@@ -6,6 +6,7 @@ import FavoriteCard from '../../components/FavoriteCard';
 import { FavoritoDTO } from '../../dtos/FavoritoDTO';
 import { Container, ConteudoFavoritos, Header, Titulo } from './styles';
 import { FlatList } from 'react-native-gesture-handler';
+import { useIsFocused } from '@react-navigation/native';
 
 const FAVORITOS_KEY = '@pokedex:favoritos';
 
@@ -13,8 +14,7 @@ const FAVORITOS_KEY = '@pokedex:favoritos';
 function Favoritos(){
     const [favoritos, setFavoritos] = useState<FavoritoDTO[]>([])
     const tema = useTheme();
-
-
+    const isFocused = useIsFocused();
     async function getFavoritos(){
         const favoritos = await AsyncStorage.getItem(FAVORITOS_KEY);        
         if(favoritos){
@@ -35,7 +35,7 @@ function Favoritos(){
 
     useEffect(() => {
         getFavoritos();
-    }, []);
+    }, [isFocused]);
     
     return(
         <Container>
