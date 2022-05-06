@@ -17,6 +17,7 @@ export const Container = styled.View<Props>`
     shadow-radius: 4px;
     elevation: 4;
     margin-bottom: 41px;
+    justify-content: space-between;
 `;
 
 export const ConteudoSvg = styled.View`
@@ -53,14 +54,14 @@ export const Tipos = styled.View`
     margin-top: 8px;
 `;
 
-
 export const Opcao = styled.View`    
-    align-items: flex-end;
-    justify-content: center;
-    margin-left: 39px;
+    align-items: center;
+    justify-content: center;    
 `;
 
 export const Botao = styled.TouchableOpacity`
     width: 40px;
     height: 40px;
+    align-items: flex-start;
+    justify-content: flex-start;
 `;

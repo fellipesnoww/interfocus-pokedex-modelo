@@ -12,7 +12,7 @@ export const Container = styled.View<Props>`
 
 export const Header = styled.View`
     width: 100%;
-    padding: 0 24px;
+    padding: 0 10px;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
@@ -28,6 +28,8 @@ export const ConteudoTitulo = styled.View`
 export const BotaoHeader = styled.TouchableOpacity`
     align-items: flex-end;
     justify-content: center;
+    width: 40px;
+    height: 40px;
 `
 
 export const Nome = styled.Text`

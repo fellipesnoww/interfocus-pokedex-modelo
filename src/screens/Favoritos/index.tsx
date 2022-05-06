@@ -39,8 +39,7 @@ function Favoritos(){
     
     return(
         <Container>
-            <Header>
-                <Feather name='arrow-left' size={17} color={tema.primary}/>
+            <Header>                
                 <Titulo>Favoritos</Titulo>
             </Header>
             
