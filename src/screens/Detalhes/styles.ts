@@ -16,23 +16,26 @@ export const Header = styled.View`
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    padding-bottom: 140px;
-     
-
+    padding-bottom: 140px;   
 `;
 
 export const ConteudoTitulo = styled.View`
     flex-direction: row;
-    align-items: flex-end;
-    justify-content: flex-start;
+    align-items: center;
+    justify-content: center;
 `;
+
+export const BotaoHeader = styled.TouchableWithoutFeedback`
+    align-items: flex-end;
+    justify-content: center;
+`
 
 export const Nome = styled.Text`
     font-family: ${({theme}) => theme.fonts.BOLD};
     color: ${({theme}) => theme.white};
     font-size: 24px;
     margin-left: 19px;
-    margin-right: 16px;
+    margin-right: 16px;    
 `;
 
 export const Codigo = styled.Text`
@@ -52,10 +55,11 @@ export const Conteudo = styled.View`
 
 export const ConteudoSvg = styled.View`
     margin-top: -130px;
-    margin-bottom: 2px;
+    position: absolute;
 `;
 
 export const Tipos = styled.View`
+    margin-top: 70px;
     width: 100%;
     flex-direction: row;
     align-items: center;

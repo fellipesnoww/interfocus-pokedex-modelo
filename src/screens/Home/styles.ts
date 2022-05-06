@@ -15,6 +15,14 @@ export const Header = styled.View`
   padding: 0 8px;
 `;
 
+export const BotaoHeader = styled.TouchableOpacity`
+  align-items: center;
+  justify-content: center;  
+  width: 40px;
+  height: 40px;
+  flex-direction: row;
+`;
+
 export const ConteudoTitulo = styled.View`
   flex-direction: row;
   align-items: center; 

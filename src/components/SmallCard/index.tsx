@@ -8,13 +8,11 @@ interface SmallCardProps{
     pokemon: PokemonDTO;
 }
 
-
-function SmallCard({pokemon, ...rest}:SmallCardProps){
-    
+function SmallCard({pokemon, ...rest}:SmallCardProps){    
     const navigation = useNavigation();
 
     function navegarParaDetalhes(pokemon: PokemonDTO){
-        navigation.navigate('Detalhes', {pokemon})
+        navigation.navigate('Detalhes' as never, {pokemon} as never)
     }
 
     return (
