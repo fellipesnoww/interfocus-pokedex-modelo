@@ -25,7 +25,7 @@ export const ConteudoTitulo = styled.View`
     justify-content: center;
 `;
 
-export const BotaoHeader = styled.TouchableWithoutFeedback`
+export const BotaoHeader = styled.TouchableOpacity`
     align-items: flex-end;
     justify-content: center;
 `
