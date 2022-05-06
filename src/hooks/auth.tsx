@@ -7,11 +7,9 @@ import * as WebBrowser from 'expo-web-browser';
 import { UsuarioDTO } from "../dtos/UsuarioDTO";
 import  api  from '../services/api';
 
-
 interface AuthProviderProps{
     children: ReactNode
 }
-
 
 interface IAuthContext{
     usuario: UsuarioDTO | null;       
@@ -20,10 +18,17 @@ interface IAuthContext{
     loadingBuscaUsuario: boolean;    
 }
 
-const URL_ACESSO_IAS = 'http://192.168.10.40:91';
-const CLIENT_ID = '3f3f15d0-7231-4407-ac94-391e7fa33b2b';
+
+// const URL_ACESSO_IAS = 'http://192.168.10.40:91';
+// const CLIENT_ID = '3f3f15d0-7231-4407-ac94-391e7fa33b2b';
+// const RESPONSE_TYPE = 'code';
+// const REDIRECT_URI = 'exp://192.168.10.246:19000';
+// const USUARIO_KEY_STORAGE = '@pokedex:usuario';
+
+const URL_ACESSO_IAS = 'http://ias.interfocus.com.br';
+const CLIENT_ID = '1a03e93e-1076-4632-b6f2-87fdc613e837';
 const RESPONSE_TYPE = 'code';
-const REDIRECT_URI = 'exp://192.168.10.246:19000';
+const REDIRECT_URI = 'exp://192.168.1.111:19000';
 const USUARIO_KEY_STORAGE = '@pokedex:usuario';
 
 const AuthContext = createContext({} as IAuthContext);
@@ -38,7 +43,8 @@ function AuthProvider({ children }: AuthProviderProps){
             grant_type: "authorization_code"
         },
         {
-            baseURL: 'http://192.168.10.40:92'
+            // baseURL: 'http://192.168.10.40:92'
+            baseURL: 'http://iasapi-beta-1.sa-east-1.elasticbeanstalk.com'
         });      
 
         return respostaCode.data && respostaCode.data.usuarioId !== 0 ? respostaCode.data : null;

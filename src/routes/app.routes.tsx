@@ -6,6 +6,9 @@ import Home from '../screens/Home';
 import Detalhes from '../screens/Detalhes';
 import Favoritos from '../screens/Favoritos';
 import Perfil from '../screens/Perfil';
+import { useTheme } from 'styled-components';
+import { Platform } from 'react-native';
+import { MaterialIcons } from '@expo/vector-icons';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -36,11 +39,55 @@ function PerfilStack(){
 }
 
 export function AppRoutes(){
+    const tema = useTheme();
     return(    
-        <Tab.Navigator screenOptions={{ headerShown: false }}>
-            <Tab.Screen name="Home" component={HomeStack} />
-            <Tab.Screen name="Favoritos" component={FavoritosStack} />
-            <Tab.Screen name="Perfil" component={PerfilStack} />
+        <Tab.Navigator 
+            screenOptions={{ 
+                headerShown: false, 
+                tabBarActiveTintColor: tema.primary,
+                tabBarInactiveTintColor: tema.ligth_gray
+             }}
+        >
+
+            <Tab.Screen 
+                name="Home" 
+                component={HomeStack}
+                options={{
+                    tabBarIcon: (({size, color}) => (
+                        <MaterialIcons 
+                            name="home"
+                            size={size}
+                            color={color}
+                        />
+                    ))
+                }} 
+            />
+            <Tab.Screen 
+                name="Favoritos" 
+                component={FavoritosStack}
+                options={{
+                    tabBarIcon: (({size, color}) => (
+                        <MaterialIcons 
+                            name="star"
+                            size={size}
+                            color={color}
+                        />
+                    ))
+                }} 
+             />
+            <Tab.Screen 
+                name="Perfil" 
+                component={PerfilStack}
+                options={{
+                    tabBarIcon: (({size, color}) => (
+                        <MaterialIcons 
+                            name="person"
+                            size={size}
+                            color={color}
+                        />
+                    ))
+                }} 
+            />
         </Tab.Navigator>         
     );
 }
