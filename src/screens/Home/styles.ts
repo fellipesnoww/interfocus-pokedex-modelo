@@ -1,4 +1,5 @@
 import styled from 'styled-components/native';
+import {RFValue} from 'react-native-responsive-fontsize';
 
 export const Container = styled.View`
   flex: 1;
@@ -8,7 +9,7 @@ export const Container = styled.View`
 
 export const Header = styled.View`
   width: 100%;
-  margin-top: 24px;
+  margin-top: 44px;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
@@ -29,7 +30,7 @@ export const ConteudoTitulo = styled.View`
 `;
 
 export const Titulo = styled.Text`
-  font-size: 24px;
+  font-size: ${RFValue(24)}px;
   font-family: ${({theme}) => theme.fonts.BOLD};
   color: ${({theme}) => theme.dark_gray};
   margin-left: 16px;

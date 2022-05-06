@@ -1,6 +1,6 @@
 import React from "react";
 import { PokemonDTO } from "../../dtos/PokemonDTO";
-import { Codigo, Container, ConteudoCodigo, ConteudoNome, Nome } from "./styles";
+import { Codigo, Container, ConteudoCodigo, ConteudoNome, ConteudoSvg, Nome } from "./styles";
 import retornaSvg from "../../utils/retornaSvg";
 import { useNavigation } from "@react-navigation/native";
 
@@ -20,7 +20,9 @@ function SmallCard({pokemon, ...rest}:SmallCardProps){
             <ConteudoCodigo>
                 <Codigo type={pokemon.types[0].name}>{pokemon.code}</Codigo>
             </ConteudoCodigo>
-           {retornaSvg(pokemon.name)}
+            <ConteudoSvg>
+                {retornaSvg(pokemon.name)}
+            </ConteudoSvg>
             <ConteudoNome type={pokemon.types[0].name}>
                 <Nome>{pokemon.name}</Nome>
             </ConteudoNome>

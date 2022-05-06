@@ -1,4 +1,5 @@
 import styled from 'styled-components/native';
+import {RFValue} from 'react-native-responsive-fontsize';
 
 interface Props {
     type: string;
@@ -6,17 +7,18 @@ interface Props {
 
 export const Container = styled.View<Props>`
   flex: 1;
-  padding: 30px 4px 4px 4px;  
+  padding: 44px 4px 0px 4px;  
   background-color: ${({theme, type}) => theme[type]};
 `;
 
 export const Header = styled.View`
     width: 100%;
-    padding: 0 10px;
+    padding-right: 20px;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    padding-bottom: 140px;   
+    padding-bottom: 140px;  
+  
 `;
 
 export const ConteudoTitulo = styled.View`
@@ -35,7 +37,7 @@ export const BotaoHeader = styled.TouchableOpacity`
 export const Nome = styled.Text`
     font-family: ${({theme}) => theme.fonts.BOLD};
     color: ${({theme}) => theme.white};
-    font-size: 24px;
+    font-size: ${RFValue(24)}px;
     margin-left: 19px;
     margin-right: 16px;    
 `;
@@ -43,7 +45,7 @@ export const Nome = styled.Text`
 export const Codigo = styled.Text`
     font-family: ${({theme}) => theme.fonts.BOLD};
     color: ${({theme}) => theme.white};
-    font-size: 12px;
+    font-size: ${RFValue(12)}px;
 `;
 
 
@@ -72,13 +74,14 @@ export const Tipos = styled.View`
 export const LabelDestaque = styled.Text<Props>`
     font-family: ${({theme}) => theme.fonts.BOLD};    
     color: ${({theme, type}) => theme[type]};
-    font-size: 14px;
+    font-size: ${RFValue(14)}px;
+
 `;
 
 export const Sobre = styled.Text`
     font-family: ${({theme}) => theme.fonts.REGULAR};    
     color: ${({theme}) => theme.dark_gray};
-    font-size: 10px;
+    font-size: ${RFValue(10)}px;
     line-height: 16px;
     text-align: justify;
     flex-wrap: wrap;

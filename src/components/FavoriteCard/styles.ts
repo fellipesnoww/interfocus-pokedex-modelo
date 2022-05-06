@@ -1,4 +1,5 @@
 import styled from 'styled-components/native';
+import {RFValue} from 'react-native-responsive-fontsize';
 
 interface Props{
     type: string;
@@ -41,8 +42,8 @@ export const Descricao = styled.View`
     justify-content: center;
 `;
 
-export const LabelBold = styled.Text<Props>`
-    font-size: 16px;
+export const LabelBold = styled.Text<Props>`    
+    font-size: ${RFValue(16)}px;
     font-family: ${({theme}) => theme.fonts.BOLD};
     color: ${({theme, type}) => theme[type]};
 `;

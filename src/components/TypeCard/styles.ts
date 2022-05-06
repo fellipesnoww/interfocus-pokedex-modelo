@@ -1,4 +1,5 @@
 import styled from 'styled-components/native';
+import {RFValue} from 'react-native-responsive-fontsize';
 interface Props {
     type: string;
 }
@@ -15,5 +16,5 @@ export const Container = styled.View<Props>`
 export const Tipo = styled.Text`
     font-family: ${({theme}) => theme.fonts.BOLD};
     color: ${({theme}) => theme.white};
-    font-size: 10px;
+    font-size: ${RFValue(10)}px;
 `;

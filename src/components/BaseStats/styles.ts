@@ -1,4 +1,5 @@
 import styled from 'styled-components/native';
+import { RFValue } from 'react-native-responsive-fontsize';
 
 interface MedidorProps{
   percentual: string;
@@ -27,7 +28,7 @@ export const Atributos = styled.View`
 export const Atributo = styled.Text<MedidorBackgroundProps>`
   font-family: ${({theme}) => theme.fonts.BOLD};
   color: ${({theme, type}) => theme[type]};
-  font-size: 12px;
+  font-size: ${RFValue(12)}px;
 `;
 
 
@@ -40,7 +41,7 @@ export const Valores = styled.View`
 export const Valor = styled.Text`
   font-family: ${({theme}) => theme.fonts.REGULAR};
   color: ${({theme}) => theme.dark_gray};
-  font-size: 12px;
+  font-size: ${RFValue(12)}px;
 `;
 
 export const Medidores = styled.View`

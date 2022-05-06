@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components/native';
-
+import { RFValue } from 'react-native-responsive-fontsize';
 interface Props{
     naoExibirBorda?: boolean;
 }
@@ -32,7 +32,7 @@ export const Medidas = styled.View`
 `;
 
 export const Valor = styled.Text`
-    font-size: 10px;
+    font-size: ${RFValue(10)}px;
     color: ${({theme}) => theme.dark_gray};    
 `;
 
@@ -42,7 +42,7 @@ export const Acoes = styled.View`
 `;
 
 export const Nome = styled.Text`
-    font-size: 8px;
+    font-size: ${RFValue(8)}px;
     color: ${({theme}) => theme.medium_gray};  
     margin-top: 10px;
 `;

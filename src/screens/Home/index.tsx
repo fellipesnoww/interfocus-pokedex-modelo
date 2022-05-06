@@ -1,4 +1,3 @@
-import { Feather } from '@expo/vector-icons';
 import React, { useEffect, useState } from 'react';
 import { FlatList, Keyboard, TouchableWithoutFeedback } from 'react-native';
 import { useTheme } from 'styled-components';
