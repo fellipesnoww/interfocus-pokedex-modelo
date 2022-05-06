@@ -1,17 +1,22 @@
 import styled from 'styled-components/native';
 
-export const Container = styled.View`
+interface Props{
+    type: string;
+}
+
+export const Container = styled.View<Props>`
     width: 100%;
     flex-direction: row;
     background-color: ${({theme}) => theme.white};
     border-radius: 8px;
     align-items: center;
     box-shadow: 0px 4px 4px;
-    shadow-color: ${({theme}) => theme.grass};
+    shadow-color: ${({theme, type}) => theme[type]};
     shadow-offset: 0px 4px;
     shadow-opacity: 0.25;
     shadow-radius: 4px;
     elevation: 4;
+    margin-bottom: 41px;
 `;
 
 export const ConteudoSvg = styled.View`
@@ -35,10 +40,10 @@ export const Descricao = styled.View`
     justify-content: center;
 `;
 
-export const LabelBold = styled.Text`
+export const LabelBold = styled.Text<Props>`
     font-size: 16px;
     font-family: ${({theme}) => theme.fonts.BOLD};
-    color: ${({theme}) => theme.grass};
+    color: ${({theme, type}) => theme[type]};
 `;
 
 export const Tipos = styled.View`

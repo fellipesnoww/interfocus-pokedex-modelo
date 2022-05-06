@@ -22,6 +22,6 @@ export const Titulo = styled.Text`
 `;
 
 export const ConteudoFavoritos = styled.View`
-  flex: 1;  
-  padding: 33px 0px 0px 24px;
+  width: 100%;
+ 
 `;
