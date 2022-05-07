@@ -9,6 +9,7 @@ import Perfil from '../screens/Perfil';
 import { useTheme } from 'styled-components';
 import { Platform } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
+import Splash from '../screens/Splash';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -48,7 +49,6 @@ export function AppRoutes(){
                 tabBarInactiveTintColor: tema.ligth_gray
              }}
         >
-
             <Tab.Screen 
                 name="Home" 
                 component={HomeStack}

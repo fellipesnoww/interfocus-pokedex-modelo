@@ -6,6 +6,7 @@ import theme from './src/styles/theme';
 import { Routes } from './src/routes';
 import { AuthProvider } from './src/hooks/auth';
 import { StatusBar } from 'react-native';
+import Splash from './src/screens/Splash';
 
 
 export default function App() {
@@ -15,8 +16,9 @@ export default function App() {
   });
 
   if (!fontsLoaded) {
-    return <AppLoading />;
+    return <Splash />;
   }
+  
   return (
     <ThemeProvider theme={theme}>
       <StatusBar 
