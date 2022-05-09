@@ -13,6 +13,8 @@ import { Feather, MaterialCommunityIcons } from '@expo/vector-icons'
 import { BotaoHeader, Codigo, Container, Conteudo, ConteudoSvg, ConteudoTitulo, Header, LabelDestaque, Nome, Sobre, Tipos } from "./styles";
 import { useTheme } from "styled-components";
 import { FavoritoDTO } from "../../dtos/FavoritoDTO";
+import { useAuth } from "../../hooks/auth";
+import { UsuarioDTO } from "../../dtos/UsuarioDTO";
 
 const FAVORITOS_KEY = '@pokedex:favoritos';
 interface ParametrosTela{
@@ -27,6 +29,7 @@ function Detalhes(){
 
     const route = useRoute();
     const navigation = useNavigation();
+    const { usuario } = useAuth();
 
     function voltar(){
         navigation.goBack();
@@ -66,7 +69,8 @@ function Detalhes(){
             } else {                
                 favoritosParse.push({
                     id: Math.random(),
-                    pokemon
+                    pokemon,
+                    usuario: usuario as UsuarioDTO
                 });
     
                 await AsyncStorage.setItem(FAVORITOS_KEY, JSON.stringify(favoritosParse));                     
@@ -74,7 +78,8 @@ function Detalhes(){
         } else {
             const novoFavorito = [{
                 id: Math.random(),
-                pokemon
+                pokemon,
+                usuario: usuario as UsuarioDTO
             }]
 
             await AsyncStorage.setItem(FAVORITOS_KEY, JSON.stringify(novoFavorito));
