@@ -12,9 +12,7 @@ import { Feather, MaterialCommunityIcons } from '@expo/vector-icons'
 
 import { BotaoHeader, Codigo, Container, Conteudo, ConteudoSvg, ConteudoTitulo, Header, LabelDestaque, Nome, Sobre, Tipos } from "./styles";
 import { useTheme } from "styled-components";
-import { FavoritoDTO } from "../../dtos/FavoritoDTO";
-import { useAuth } from "../../hooks/auth";
-import { UsuarioDTO } from "../../dtos/UsuarioDTO";
+import { useFavorite } from "../../hooks/favorite";
 
 const FAVORITOS_KEY = '@pokedex:favoritos';
 interface ParametrosTela{
@@ -28,71 +26,18 @@ function Detalhes(){
     const isFocused = useIsFocused();
 
     const route = useRoute();
-    const navigation = useNavigation();
-    const { usuario } = useAuth();
+    const navigation = useNavigation();    
+    const { verificaExistencia, adicionarFavorito } = useFavorite();
 
     function voltar(){
         navigation.goBack();
     }
 
 
-    async function removeStorage(id: number){
-        const favoritos = await AsyncStorage.getItem(FAVORITOS_KEY);        
-        if(favoritos){
-            const favoritosParse = JSON.parse(favoritos) as FavoritoDTO[];
-            const filtrados = favoritosParse.filter(f => f.pokemon.id !== id);
-            await AsyncStorage.setItem(FAVORITOS_KEY, JSON.stringify(filtrados));            
-        }
-    }
-
-
-    async function verificaFavorito(id: number) {
-        // await AsyncStorage.clear();
-        const favoritos = await AsyncStorage.getItem(FAVORITOS_KEY);        
-        if(favoritos){
-            const favoritosParse = JSON.parse(favoritos) as FavoritoDTO[];
-            if(favoritosParse.some(f => f.pokemon.id === id)){
-                setFavoritado(true);
-            } else {
-                setFavoritado(false);
-            }
-        }
-    }
-
-    async function addFavoritos(pokemon: PokemonDTO) {
-        const favoritos = await AsyncStorage.getItem(FAVORITOS_KEY);
-        if(favoritos){
-            const favoritosParse = JSON.parse(favoritos) as FavoritoDTO[];
-            if(favoritosParse.some(f => f.pokemon.id === pokemon.id)){
-                await removeStorage(pokemon.id);
-                setFavoritado(oldState => !oldState);
-            } else {                
-                favoritosParse.push({
-                    id: Math.random(),
-                    pokemon,
-                    usuario: usuario as UsuarioDTO
-                });
-    
-                await AsyncStorage.setItem(FAVORITOS_KEY, JSON.stringify(favoritosParse));                     
-            }
-        } else {
-            const novoFavorito = [{
-                id: Math.random(),
-                pokemon,
-                usuario: usuario as UsuarioDTO
-            }]
-
-            await AsyncStorage.setItem(FAVORITOS_KEY, JSON.stringify(novoFavorito));
-
-        }
-        setFavoritado(true);
-    }
-
     useEffect(() => {
         const parametros = route.params as ParametrosTela;               
-        setPokemon(parametros.pokemon);
-        verificaFavorito(parametros.pokemon.id);
-        
+        setPokemon(parametros.pokemon); 
+        verificaExistencia       
     },[isFocused]);
 
     const tema = useTheme();
@@ -116,7 +61,7 @@ function Detalhes(){
                     <Nome>{pokemon.name}</Nome>
                     <Codigo>{pokemon.code}</Codigo>
                 </ConteudoTitulo>
-                <BotaoHeader onPress={() => addFavoritos(pokemon)}>
+                <BotaoHeader onPress={() => adicionarFavorito(pokemon)}>
                     {favoritado ? (
                         <MaterialCommunityIcons
                             name="heart"

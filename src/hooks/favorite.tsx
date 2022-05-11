@@ -16,6 +16,7 @@ const FAVORITOS_KEY = '@pokedex:favoritos';
 function FavoriteProvider({children}: FavoriteProviderProps){
     const [favoritos, setFavoritos] = useState<FavoritoDTO[]>([]);
     const [consultando, setConsultando] = useState(true);
+    const [favoritado, setFavoritado] = useState(false);
     
     const {usuario} = useAuth();
 
@@ -39,16 +40,16 @@ function FavoriteProvider({children}: FavoriteProviderProps){
     }
 
 
-    async function verificaExistencia(id: number): Promise<boolean> {        
+    async function verificaExistencia(id: number): Promise<void> {        
         const favoritos = await AsyncStorage.getItem(FAVORITOS_KEY);        
         if(favoritos){
             const favoritosParse = JSON.parse(favoritos) as FavoritoDTO[];
             if(favoritosParse.some(f => f.pokemon.id === id)){
-                return true;
+                setFavoritado(true);
             }
-            return false;
+            setFavoritado(false);
         }
-        return false;
+         setFavoritado(false);
     }
 
     async function adicionarFavorito(pokemon: PokemonDTO) {       
@@ -64,7 +65,9 @@ function FavoriteProvider({children}: FavoriteProviderProps){
                     usuario: usuario as UsuarioDTO
                 });
     
-                await AsyncStorage.setItem(FAVORITOS_KEY, JSON.stringify(favoritosParse));                     
+                await AsyncStorage.setItem(FAVORITOS_KEY, JSON.stringify(favoritosParse));        
+                setFavoritado(true);
+
             }
         } else {
             const novoFavorito = [{
@@ -73,6 +76,7 @@ function FavoriteProvider({children}: FavoriteProviderProps){
                 usuario: usuario as UsuarioDTO
             }]
             await AsyncStorage.setItem(FAVORITOS_KEY, JSON.stringify(novoFavorito));
+            setFavoritado(true);
         }        
     }
 
@@ -87,7 +91,8 @@ function FavoriteProvider({children}: FavoriteProviderProps){
             removerFavorito,
             consultando,
             favoritos,
-            verificaExistencia
+            verificaExistencia,
+            favoritado
         }}>
             { children }
         </FavoriteContext.Provider>
