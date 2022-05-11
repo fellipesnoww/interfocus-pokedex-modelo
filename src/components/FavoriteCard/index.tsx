@@ -30,8 +30,6 @@ interface FavoritoProps{
 function FavoriteCard({pokemon, funcaoRemover, ...rest}: FavoritoProps){
     const tema = useTheme();
 
-    
-
     function removerPokemonFavoritos(pokemon: PokemonDTO){
         Alert.alert('Confirme', 
         `Deseja realmente remover o ${pokemon.name} do seus favoritos?`,

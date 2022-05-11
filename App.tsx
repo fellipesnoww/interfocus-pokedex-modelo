@@ -7,6 +7,7 @@ import { Routes } from './src/routes';
 import { AuthProvider } from './src/hooks/auth';
 import { StatusBar } from 'react-native';
 import Splash from './src/screens/Splash';
+import { FavoriteProvider } from './src/hooks/favorite';
 
 
 export default function App() {
@@ -27,7 +28,9 @@ export default function App() {
         barStyle='dark-content'
       />
       <AuthProvider>
-        <Routes/>
+        <FavoriteProvider>
+          <Routes/>
+        </FavoriteProvider>
       </AuthProvider>
     </ThemeProvider>
   );
