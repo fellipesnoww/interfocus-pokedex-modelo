@@ -45,9 +45,7 @@ function AuthProvider({ children }: AuthProviderProps){
         try {           
             let result = await WebBrowser.openAuthSessionAsync(   
                 `${URL_ACESSO_IAS}/authorize?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}`, REDIRECT_URI
-            );
-
-            console.log('...',result )
+            );            
 
             let redirectData;         
             if (result.type === 'success') {
@@ -61,7 +59,7 @@ function AuthProvider({ children }: AuthProviderProps){
             }          
             
         } catch (error) {                
-          console.log(error);
+          
         }
       };  
 

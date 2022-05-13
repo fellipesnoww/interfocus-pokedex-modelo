@@ -50,7 +50,7 @@ function Home () {
                     setPokemonsFiltrados(resposta.data)                 
                 }
             } catch (error) {
-                console.log('erro ao consultar pokemons')
+                
             }
             setLoading(false);            
         }

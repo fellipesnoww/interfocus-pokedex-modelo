@@ -7,10 +7,16 @@ import { useIsFocused } from '@react-navigation/native';
 
 function Favoritos(){
     
-    const {favoritos, removerFavorito} = useFavorite();
+    const {favoritos, removerFavorito, getFavoritos} = useFavorite();
     const isFocused = useIsFocused();
 
-    useEffect(() => {},[isFocused])
+    async function consultaDados() {
+        await getFavoritos();
+    }
+
+    useEffect(() => {        
+        consultaDados();
+    },[isFocused])
 
     return(
         <Container>

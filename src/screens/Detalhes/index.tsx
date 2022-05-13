@@ -20,24 +20,36 @@ interface ParametrosTela{
 }
 
 function Detalhes(){   
-    const [pokemon, setPokemon] = useState<PokemonDTO>();
-    const [favoritado, setFavoritado] = useState(false);
+    const [pokemon, setPokemon] = useState<PokemonDTO>();    
 
     const isFocused = useIsFocused();
 
     const route = useRoute();
     const navigation = useNavigation();    
     const { verificaExistencia, adicionarFavorito } = useFavorite();
+    const [favoritado, setFavoritado] = useState(false);
 
     function voltar(){
         navigation.goBack();
     }
 
 
+    async function executaVerificacao(id:number) {
+        const retorno = await verificaExistencia(id);
+        setFavoritado(retorno);
+    }
+
+
+    async function executaAdicao(pokemon: PokemonDTO) {
+        await adicionarFavorito(pokemon);
+        await executaVerificacao(pokemon.id);
+    }
+
+
     useEffect(() => {
         const parametros = route.params as ParametrosTela;               
         setPokemon(parametros.pokemon); 
-        verificaExistencia       
+        executaVerificacao(parametros.pokemon.id);             
     },[isFocused]);
 
     const tema = useTheme();
@@ -61,7 +73,7 @@ function Detalhes(){
                     <Nome>{pokemon.name}</Nome>
                     <Codigo>{pokemon.code}</Codigo>
                 </ConteudoTitulo>
-                <BotaoHeader onPress={() => adicionarFavorito(pokemon)}>
+                <BotaoHeader onPress={() => executaAdicao(pokemon)}>
                     {favoritado ? (
                         <MaterialCommunityIcons
                             name="heart"

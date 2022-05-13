@@ -1,4 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useIsFocused } from '@react-navigation/native';
 import React, { createContext, ReactNode, useContext, useEffect, useState } from 'react';
 import { FavoriteContext } from '../contexts/FavoriteContext';
 
@@ -15,10 +16,9 @@ const FAVORITOS_KEY = '@pokedex:favoritos';
 
 function FavoriteProvider({children}: FavoriteProviderProps){
     const [favoritos, setFavoritos] = useState<FavoritoDTO[]>([]);
-    const [consultando, setConsultando] = useState(true);
-    const [favoritado, setFavoritado] = useState(false);
+    const [consultando, setConsultando] = useState(true);    
     
-    const {usuario} = useAuth();
+    const {usuario} = useAuth();    
 
     async function getFavoritos(){
         const favoritosStorage = await AsyncStorage.getItem(FAVORITOS_KEY);        
@@ -34,22 +34,22 @@ function FavoriteProvider({children}: FavoriteProviderProps){
         if(favoritosStorage){
             const favoritosParse = JSON.parse(favoritosStorage) as FavoritoDTO[];
             const filtrados = favoritosParse.filter(f => f.pokemon.id !== id);
-            await AsyncStorage.setItem(FAVORITOS_KEY, JSON.stringify(filtrados)); 
+            await AsyncStorage.setItem(FAVORITOS_KEY, JSON.stringify(filtrados));            
             getFavoritos();
         }
     }
 
 
-    async function verificaExistencia(id: number): Promise<void> {        
+    async function verificaExistencia(id: number): Promise<boolean> {        
         const favoritos = await AsyncStorage.getItem(FAVORITOS_KEY);        
         if(favoritos){
             const favoritosParse = JSON.parse(favoritos) as FavoritoDTO[];
-            if(favoritosParse.some(f => f.pokemon.id === id)){
-                setFavoritado(true);
+            if(favoritosParse.some(f => f.pokemon.id === id)){                
+                return true;
             }
-            setFavoritado(false);
+            return false;
         }
-         setFavoritado(false);
+         return false;
     }
 
     async function adicionarFavorito(pokemon: PokemonDTO) {       
@@ -64,10 +64,7 @@ function FavoriteProvider({children}: FavoriteProviderProps){
                     pokemon,
                     usuario: usuario as UsuarioDTO
                 });
-    
-                await AsyncStorage.setItem(FAVORITOS_KEY, JSON.stringify(favoritosParse));        
-                setFavoritado(true);
-
+                await AsyncStorage.setItem(FAVORITOS_KEY, JSON.stringify(favoritosParse));                        
             }
         } else {
             const novoFavorito = [{
@@ -75,8 +72,7 @@ function FavoriteProvider({children}: FavoriteProviderProps){
                 pokemon,
                 usuario: usuario as UsuarioDTO
             }]
-            await AsyncStorage.setItem(FAVORITOS_KEY, JSON.stringify(novoFavorito));
-            setFavoritado(true);
+            await AsyncStorage.setItem(FAVORITOS_KEY, JSON.stringify(novoFavorito));            
         }        
     }
 
@@ -91,8 +87,8 @@ function FavoriteProvider({children}: FavoriteProviderProps){
             removerFavorito,
             consultando,
             favoritos,
-            verificaExistencia,
-            favoritado
+            verificaExistencia,            
+            getFavoritos
         }}>
             { children }
         </FavoriteContext.Provider>
